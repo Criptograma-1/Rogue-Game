@@ -32,7 +32,7 @@ class World {
   moveToSpace(entity) {
     for (let x = entity.x; x < this.width; x++) {
       for (let y = entity.y; y < this.width; y++){
-        if (this.worldmap[x][y] === 0){
+        if (this.worldmap[x][y] === 0 && !this.getEntityAtLocation(x, y)){
           entity.x = x;
           entity.y = y;
           return;
@@ -46,7 +46,7 @@ class World {
   }
 
   getEntityAtLocation(x,y) {
-    return this.entities.find(entity => entity.x ===x && entity.y === y);
+    return this.entities.find(entity => entity.x === x && entity.y === y);
   }
 
   movePlayer(dx, dy) {
