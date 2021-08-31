@@ -7,7 +7,7 @@ class World {
     this.height = height;
     this.tilesize = tilesize;
     this.entities = [new Player(0, 0, 16)];
-
+    this.history = ['You enter the dungeon', '---']
     this.worldmap = new Array(this.width);
 
 
@@ -71,7 +71,7 @@ class World {
     var map = new Map.Cellular(this.width, this.height, { connected: true });
     map.randomize(0.5);
     var userCallback = (x, y, value) => {
-      if (x === 0 || y === 0 || x === this.width || y === this.height) {
+      if (x === 0 || y === 0 || x === this.width -1 || y === this.height -1) {
         this.worldmap[x][y] = 1; // Create around edges of map
         return;
       }
@@ -100,6 +100,11 @@ class World {
       this.tilesize,
       this.tilesize
     );
+  }
+
+  addToHistory(history) {
+    this.history.push(history);
+    if (this.history.length > 6) this.history.shift();
   }
 }
 
